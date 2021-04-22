@@ -24,15 +24,29 @@
   {{ current_variant.price | money }}
   <label for="Quantity">quantity</label>
   <input type="number" id="Quantity" name="quantity" value="1" min="1">
-  <button type="submit" name="add" id="AddToCart" onclick="addItemToCart(event)">Add to cart</button>
+
+  {% comment %} set style variable for addToCart button {% endcomment %}
+  {% if current_variant.available %}
+    {% comment %} set style to available {% endcomment %}
+    {% assign buttonStyle="addToCart-available" %}
+    {% assign buttonDisabled = false %}
+  {% else %}
+    {% comment %} set style to unavailable {% endcomment %}
+      {% assign buttonStyle="addToCart-unavailable" %}
+      {% assign buttonDisabled = true %}
+  {% endif %}
+
+  <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" disabled={{ buttonDisabled }}>Add to cart</button>
 
 </form>
 <div>{{ product.description }}</div>
 
 <script>
+  console.log({{product.selected_or_first_available_variant.inventory_quantity}});
+
 function addItemToCart(event) {
   // prevent page from redirecting
-  event.preventDefault();
+  console.log({{current_variant.available}})
   // ajax request
   jQuery.post('/cart/add.js', {
     items: [
