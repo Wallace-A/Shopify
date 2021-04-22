@@ -39,8 +39,35 @@
       <button type="submit" name="update">Update</button>
       <button type="submit" name="checkout">Checkout</button>
     </div>
+    <div>
+    {% comment %} Label and checkbox for instructions {% endcomment %}
+      <label for="CartNote">Add instructions</label>
+      <input type="checkbox" id="checkbox" name="Add-Instructions" onclick="clickedCheckbox(event)">
+    </div>
+    <div>
+      {% comment %} textfield appears when checkbox is checked  {% endcomment %}
+      <textarea name="note" id="CartNote">{{ cart.note }}</textarea>
+    </div>
   </form>
 {% else %}
   <h2>cart</h2>
   Cart is empty
 {% endif %}
+
+<script>
+  // get checkbox
+  const checkbox = document.getElementById("checkbox")
+  // get text area
+  const note = document.getElementById("CartNote");
+  //set checkbox and text area based on cart note value
+  note.hidden = note.value == "";
+  checkbox.checked = note.value != "";
+
+  // hide/show text area when checkbox is clicked
+  function clickedCheckbox(event) {
+    note.toggleAttribute("hidden");
+    //empty text area when unchecked
+    if(note.hidden) note.value = "";
+  }
+
+</script>
