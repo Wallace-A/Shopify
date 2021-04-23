@@ -1,6 +1,23 @@
 {% schema %}
   {
     "name": "news-carousel",
-    "settings": []
+    "settings": [
+      {
+        "type": "text",
+        "label": "Title",
+        "id": "title"
+      },
+      {
+        "type": "textarea",
+        "label": "Description",
+        "id": "description"
+      },
+      {
+        "type": "checkbox",
+        "label": "Featured",
+        "id": "featured",
+        "default": false
+      }
+    ]
   }
 {% endschema %}
