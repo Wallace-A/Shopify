@@ -29,24 +29,26 @@
   {% if current_variant.available %}
     {% comment %} set style to available {% endcomment %}
     {% assign buttonStyle="addToCart-available" %}
-    {% assign buttonDisabled = false %}
+    {% assign buttonDisabled = "" %}
+
   {% else %}
     {% comment %} set style to unavailable {% endcomment %}
       {% assign buttonStyle="addToCart-unavailable" %}
-      {% assign buttonDisabled = true %}
+      {% assign buttonDisabled = "disabled" %}
   {% endif %}
 
-  <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" disabled={{ buttonDisabled }}>Add to cart</button>
+  <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" {{ buttonDisabled }} >Add to cart</button>
 
 </form>
 <div>{{ product.description }}</div>
 
 <script>
-  console.log({{product.selected_or_first_available_variant.inventory_quantity}});
+
+const addItemButton = document.getElementById("AddToCart");
 
 function addItemToCart(event) {
-  // prevent page from redirecting
-  console.log({{current_variant.available}})
+  console.log("adding to cart");
+  console.log({{current_variant.inventory_quantity}});
   // ajax request
   jQuery.post('/cart/add.js', {
     items: [
@@ -60,4 +62,6 @@ function addItemToCart(event) {
     ]
   })
 }
+
+
 </script>

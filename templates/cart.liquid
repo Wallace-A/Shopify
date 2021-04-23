@@ -19,6 +19,7 @@
             <td>
               <a href="{{ item.url }}">{{ item.product.title }}</a>
               {{ item.variant.title }}
+              Index: {{ item.properties[0].first}}
               <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
             </td>
             <td>{{ item.price | money }}</td>
@@ -55,6 +56,7 @@
 {% endif %}
 
 <script>
+  console.log({{ cart.items | json }});
   // get checkbox
   const checkbox = document.getElementById("checkbox")
   // get text area
