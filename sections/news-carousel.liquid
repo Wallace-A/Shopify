@@ -1,9 +1,11 @@
-<div>
+<div class="block-grid">
 {% comment %} sort blocks based on featured setting {% endcomment %}
   {% for block in section.blocks%}
   {% comment %} display title and description {% endcomment %}
-    <h2> {{ block.settings.title }} </h2>
-    <h3> {{ block.settings.description }} </h3>
+    <div class="block-container">
+      <h2> {{ block.settings.title }} </h2>
+      <h3> {{ block.settings.description }} </h3>
+    </div>
   {% endfor %}
 </div>
 
@@ -80,3 +82,15 @@
     ]
   }
 {% endschema %}
+
+{% style %}
+  .block-grid {
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .block-container {
+    border: 4px solid black;
+    padding: 8px;
+  }
+{% endstyle  %}
