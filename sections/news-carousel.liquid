@@ -1,11 +1,23 @@
 <div class="block-grid">
-{% comment %} sort blocks based on featured setting {% endcomment %}
-  {% for block in section.blocks%}
-  {% comment %} display title and description {% endcomment %}
-    <div class="block-container">
-      <h2> {{ block.settings.title }} </h2>
-      <h3> {{ block.settings.description }} </h3>
-    </div>
+  {% comment %} sort blocks based on featured setting {% endcomment %}
+  {% for block in section.blocks %}
+    {% if block.settings.featured %}
+      {% comment %} display title and description {% endcomment %}
+      <div class="block-container">
+        <h2 class={{ block.type }}> {{ block.settings.title }} </h2>
+        <h3> {{ block.settings.description }} </h3>
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% comment %} display non-featured {% endcomment %}
+  {% for block in section.blocks %}
+    {% if block.settings.featured == false%}
+      {% comment %} display title and description {% endcomment %}
+      <div class="block-container">
+        <h2 class={{ block.type }}> {{ block.settings.title }} </h2>
+        <h3> {{ block.settings.description }} </h3>
+      </div>
+    {% endif %}
   {% endfor %}
 </div>
 
@@ -14,7 +26,7 @@
     "name": "news-carousel",
     "blocks": [
       {
-        "type": "block-1",
+        "type": "campaign",
         "name": "Campaign",
         "settings": [
           {
@@ -36,7 +48,7 @@
         ]
       },
       {
-        "type": "block-2",
+        "type": "new-product",
         "name": "New Product",
         "settings": [
           {
@@ -58,7 +70,7 @@
         ]
       },
       {
-        "type": "block-3",
+        "type": "news",
         "name": "News",
         "settings": [
           {
@@ -87,10 +99,24 @@
   .block-grid {
     display:flex;
     justify-content: space-between;
+    margin-top: 12px;
+    margin-bottom: 12px;
   }
 
   .block-container {
     border: 4px solid black;
     padding: 8px;
+  }
+
+  .campaign {
+    color: red;
+  }
+
+  .new-product {
+    color: blue;
+  }
+
+  .news {
+    color: green;
   }
 {% endstyle  %}
