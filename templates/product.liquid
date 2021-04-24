@@ -54,8 +54,18 @@
       </div>
       <div class="modal-body">
         {% comment %} disaply info about current product {% endcomment %}
-        <h5 class="modal-title">Current Product</h5>
-        <p>I am a current product</p>
+        <h5 class="modal-title">Current Product:</h5>
+        <div class="modal-list-item-container">
+          <div class="modal-item-img">
+             <img src="{{ product | img_url: 'small' }}" alt="{{ item.title | escape }}">
+          </div>
+          <div class="modal-list-item-content">
+            <p>{{ product.title}}</p>
+          </div>
+          <div class="modal-list-item-content">
+            <p>{{ current_variant.inventory_quantity }} in stock</p>
+          </div>
+        </div>
         {% comment %} disaply info about cart{% endcomment %}
         <h5 class="modal-title">Cart</h5>
         <p>I am a cart item</p>
