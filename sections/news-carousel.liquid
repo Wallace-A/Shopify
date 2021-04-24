@@ -1,0 +1,125 @@
+<div class="block-grid">
+  {% comment %} sort blocks based on featured setting {% endcomment %}
+  {% for block in section.blocks %}
+    {% if block.settings.featured %}
+      {% comment %} display title and description {% endcomment %}
+      <div class="block-container">
+        <h2 class={{ block.type }}> {{ block.settings.title }} </h2>
+        <h3> {{ block.settings.description }} </h3>
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% comment %} display non-featured {% endcomment %}
+  {% for block in section.blocks %}
+    {% if block.settings.featured == false%}
+      {% comment %} display title and description {% endcomment %}
+      <div class="block-container">
+        <h2 class={{ block.type }}> {{ block.settings.title }} </h2>
+        <h3> {{ block.settings.description }} </h3>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+  {
+    "name": "news-carousel",
+    "blocks": [
+      {
+        "type": "campaign",
+        "name": "Campaign",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Title",
+            "id": "title"
+          },
+          {
+            "type": "textarea",
+            "label": "Description",
+            "id": "description"
+          },
+          {
+            "type": "checkbox",
+            "label": "Featured",
+            "id": "featured",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "new-product",
+        "name": "New Product",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Title",
+            "id": "title"
+          },
+          {
+            "type": "textarea",
+            "label": "Description",
+            "id": "description"
+          },
+          {
+            "type": "checkbox",
+            "label": "Featured",
+            "id": "featured",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "news",
+        "name": "News",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Title",
+            "id": "title"
+          },
+          {
+            "type": "textarea",
+            "label": "Description",
+            "id": "description"
+          },
+          {
+            "type": "checkbox",
+            "label": "Featured",
+            "id": "featured",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% style %}
+  .block-grid {
+    width: 1200px;
+    margin: auto;
+    display:flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  .block-container {
+    width: 300px;
+    border: 4px solid black;
+    padding: 8px;
+  }
+
+  .campaign {
+    color: red;
+  }
+
+  .new-product {
+    color: blue;
+  }
+
+  .news {
+    color: green;
+  }
+{% endstyle  %}
