@@ -24,21 +24,17 @@
   {{ current_variant.price | money }}
   <label for="Quantity">quantity</label>
   <input type="number" id="Quantity" name="quantity" value="1" min="1">
-
   {% comment %} set style variable for addToCart button {% endcomment %}
   {% if current_variant.available %}
     {% comment %} set style to available {% endcomment %}
     {% assign buttonStyle="addToCart-available" %}
     {% assign buttonDisabled = "" %}
-
   {% else %}
     {% comment %} set style to unavailable {% endcomment %}
       {% assign buttonStyle="addToCart-unavailable" %}
       {% assign buttonDisabled = "disabled" %}
   {% endif %}
-
   <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" {{ buttonDisabled }} >Add to cart</button>
-
 </form>
 <div>{{ product.description }}</div>
 
@@ -47,8 +43,6 @@
 const addItemButton = document.getElementById("AddToCart");
 
 function addItemToCart(event) {
-  console.log("adding to cart");
-  console.log({{current_variant.inventory_quantity}});
   // ajax request
   jQuery.post('/cart/add.js', {
     items: [
@@ -57,7 +51,7 @@ function addItemToCart(event) {
       quantity: parseInt($("#Quantity").val()),
       id: {{ product.selected_or_first_available_variant.id }},
       // puts each set of items into next position on cart, instead of one
-      properties: { "cart_index": {{ cart.item_count }} }
+      properties: { "cart_index": {{ cart.items.size }} }
       }
     ]
   })
