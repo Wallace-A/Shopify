@@ -24,22 +24,86 @@
   {{ current_variant.price | money }}
   <label for="Quantity">quantity</label>
   <input type="number" id="Quantity" name="quantity" value="1" min="1">
-  {% comment %} set style variable for addToCart button {% endcomment %}
+  <!-- set style variable for addToCart button -->
   {% if current_variant.available %}
-    {% comment %} set style to available {% endcomment %}
+  <!-- set style to available -->
     {% assign buttonStyle="addToCart-available" %}
     {% assign buttonDisabled = "" %}
   {% else %}
-    {% comment %} set style to unavailable {% endcomment %}
-      {% assign buttonStyle="addToCart-unavailable" %}
-      {% assign buttonDisabled = "disabled" %}
+    <!-- set style to unavailable -->
+    {% assign buttonStyle="addToCart-unavailable" %}
+    {% assign buttonDisabled = "disabled" %}
   {% endif %}
   <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" {{ buttonDisabled }} >Add to cart</button>
 </form>
 <div>{{ product.description }}</div>
+<!-- -->
+{% comment %} modal {% endcomment %} 
 
-<script>
+<div class="modal" id="product-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- display info about current product -->
+        <h5 class="modal-title">Current Product</h5>
+        <div class="modal-list-item-container">
+          <div class="modal-item-img">
+             <img src="{{ product | img_url: 'small' }}" alt="{{ item.title | escape }}">
+          </div>
+          <div class="modal-list-item-content">
+            <p>{{ product.title}}</p>
+          </div>
+          <div class="modal-list-item-content">
+            <p>{{ current_variant.inventory_quantity }} in stock</p>
+          </div>
+        </div>
+        <!-- display info about cart -->
+        <h5 class="modal-title">Cart</h5>
+        {% for item in cart.items %}
+          <div class="modal-list-item-container">
+            <div class="modal-item-img">
+              <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
+            </div>
+            <div class="modal-list-item-content">
+              <p>Cart Index: {{ item.properties["cart_index"] }}</p>
+            </div>
+            <div class="modal-list-item-content">
+              <p>x{{ item.quantity }}</p>
+            </div>
+            <div class="modal-list-item-content">
+              <p>{{ item.line_price | money }}</p>
+            </div>
+          </div>
+        {% endfor %}
+        <!--  display total quantity/price -->
+        <h5 class="modal-title">Total</h5>
+        <div class="modal-total-container">
+          <div class="modal-total-content">
+              <p>x{{ cart.item_count }}</p>
+          </div>
+          <div class="modal-total-content">
+            <p>{{ cart.total_price | money }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script type="text/javascript">
+console.log({{ cart | json}})
+//open modal on load
+$(window).on('load', function() {
+        $('#product-modal').modal('show');
+});
+
+//get add item button
 const addItemButton = document.getElementById("AddToCart");
 
 function addItemToCart(event) {
