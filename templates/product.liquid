@@ -43,7 +43,7 @@
 <div>{{ product.description }}</div>
 
 <script>
-
+console.log({{cart | json}});
 const addItemButton = document.getElementById("AddToCart");
 
 function addItemToCart(event) {
@@ -57,7 +57,7 @@ function addItemToCart(event) {
       quantity: parseInt($("#Quantity").val()),
       id: {{ product.selected_or_first_available_variant.id }},
       // puts each set of items into next position on cart, instead of one
-      properties: { "cart_index": {{ cart.item_count }} }
+      properties: { "cart_index": {{ cart.items.size }} }
       }
     ]
   })
