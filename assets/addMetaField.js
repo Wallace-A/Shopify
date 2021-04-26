@@ -25,7 +25,7 @@ async function addMetafield () {
   // create metafield
   const metafield = {
     "metafield": {
-      "namespace": "global",
+      "namespace": metaNamespace,
       "key": "test",
       "value": metavalue,
       "value_type": "integer"
