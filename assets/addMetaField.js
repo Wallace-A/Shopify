@@ -1,27 +1,44 @@
-
 var axios = require('axios'); 
-console.log("script is here!");
-// API_KEY = "098dd2d89ebf5b8f4f59ee911d4dd1c7";
-// PASSWORD = "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";
-//product_id = 6691201941654;
-let burl = "https://bf39dff873081d5f3188b06656b3cbc1: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@brandon-lambs-store.myshopify.com/admin/products/6693552193686/metafields.json";
+const API_KEY = "098dd2d89ebf5b8f4f59ee911d4dd1c7";
+const PASSWORD = "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";
+const product_id = 6691201941654;
+let url = `https://${API_KEY}:${PASSWORD}@strange-wall.myshopify.com/admin/products/${product_id}/metafields.json`;
 
-let url = "https://098dd2d89ebf5b8f4f59ee911d4dd1c7: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@strange-wall.myshopify.com/admin/products/6693535449238/metafields.json";
-console.log(url);
 async function addMetafield () {
-  
+  //  metafield name and value
+  let metaNamespace = "global";
+  let metavalue = 0;
   // get product metafields
   await axios.get(url)
   .then(function(response) {
-    console.log("success");
+    // search for namespace in existing metafields
+    const globalField = response.data.metafields.find(element => element.namespace === metaNamespace);
+    // if metafield exists set metavalue to value + 1
+    if(globalField) {
+      metavalue = globalField.value + 1;
+    }
   })
   .catch(function (error) {
     // handle error
     console.log(error);
   })
   // create metafield
-
+  const metafield = {
+    "metafield": {
+      "namespace": "global",
+      "key": "test",
+      "value": metavalue,
+      "value_type": "integer"
+    }
+  };
   // send/update new metafield
+  axios.post(url, metafield)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
 
 addMetafield();
