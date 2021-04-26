@@ -20,11 +20,19 @@
 
 .modal-total-container {
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   display:flex;
-  float: right
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .modal-total-content {
   margin-left: 80px;
 }
+
+.modal-backdrop
+{
+    opacity:0.5 !important;
+}
+
+
