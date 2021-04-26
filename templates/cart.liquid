@@ -41,7 +41,7 @@
     </div>
     <div>
     {% comment %} set textArea to hidden/disabled if note is empty {% endcomment %}
-    {% if cart.note == "" %}
+    {% if cart.note == blank %}
       {% assign textHidden = "hidden" %}
       {% assign checked = "" %}
     {% else %}
