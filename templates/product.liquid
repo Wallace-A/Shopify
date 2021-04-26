@@ -37,9 +37,8 @@
   <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" {{ buttonDisabled }} >Add to cart</button>
 </form>
 <div>{{ product.description }}</div>
-<!-- -->
-{% comment %} modal {% endcomment %} 
 
+<!-- modal -->
 <div class="modal" id="product-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
