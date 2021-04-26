@@ -41,6 +41,6 @@ async function addMetafield () {
   });
 }
 
-addMetafield();
+//addMetafield();
 
 
