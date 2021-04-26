@@ -37,9 +37,8 @@
   <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" {{ buttonDisabled }} >Add to cart</button>
 </form>
 <div>{{ product.description }}</div>
-<!-- -->
-{% comment %} modal {% endcomment %} 
 
+<!-- modal -->
 <div class="modal" id="product-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -51,7 +50,7 @@
       </div>
       <div class="modal-body">
         <!-- display info about current product -->
-        <h5 class="modal-title">Current Product</h5>
+        <h3 class="modal-title">Current Product</h5>
         <div class="modal-list-item-container">
           <div class="modal-item-img">
              <img src="{{ product | img_url: 'small' }}" alt="{{ item.title | escape }}">
@@ -64,7 +63,7 @@
           </div>
         </div>
         <!-- display info about cart -->
-        <h5 class="modal-title">Cart</h5>
+        <h3 class="modal-title">Cart</h5>
         {% for item in cart.items %}
           <div class="modal-list-item-container">
             <div class="modal-item-img">
@@ -85,7 +84,7 @@
           </div>
         {% endfor %}
         <!--  display total quantity/price -->
-        <h5 class="modal-title">Total</h5>
+        <h3 class="modal-title">Total</h5>
         <div class="modal-total-container">
           <div class="modal-total-content">
               <p>x{{ cart.item_count }}</p>

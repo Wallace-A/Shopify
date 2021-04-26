@@ -1,0 +1,38 @@
+
+.addToCart-available {
+  color:white;
+  background-color: green;
+}
+
+.addToCart-available:hover{
+  background-color: blue;
+}
+
+.addToCart-unavailable {
+  background-color:grey;
+}
+
+.modal-list-item-container {
+  align-items: center;
+  justify-content: space-between;
+  display:flex;
+}
+
+.modal-total-container {
+  align-items: center;
+  justify-content: flex-end;
+  display:flex;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.modal-total-content {
+  margin-left: 80px;
+}
+
+.modal-backdrop
+{
+    opacity:0.5 !important;
+}
+
+
