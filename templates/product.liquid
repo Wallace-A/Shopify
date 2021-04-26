@@ -74,6 +74,9 @@
               <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
             </div>
             <div class="modal-list-item-content">
+              <p>{{ item.title }}</p>
+            </div>
+            <div class="modal-list-item-content">
               <p>Cart Index: {{ item.properties["cart_index"] }}</p>
             </div>
             <div class="modal-list-item-content">
