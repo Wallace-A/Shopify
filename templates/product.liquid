@@ -29,15 +29,12 @@
   <!-- set style to available -->
     {% assign buttonStyle="addToCart-available" %}
     {% assign buttonDisabled = "" %}
-
   {% else %}
     <!-- set style to unavailable -->
     {% assign buttonStyle="addToCart-unavailable" %}
     {% assign buttonDisabled = "disabled" %}
   {% endif %}
-
   <button type="submit" class={{ buttonStyle }}  name="add" id="AddToCart" onclick="addItemToCart('AddToCartForm'); return false;" {{ buttonDisabled }} >Add to cart</button>
-
 </form>
 <div>{{ product.description }}</div>
 <!-- -->
@@ -113,7 +110,6 @@ $(window).on('load', function() {
 const addItemButton = document.getElementById("AddToCart");
 
 function addItemToCart(event) {
-  console.log("adding to cart");
   // ajax request
   jQuery.post('/cart/add.js', {
     items: [
@@ -122,7 +118,7 @@ function addItemToCart(event) {
       quantity: parseInt($("#Quantity").val()),
       id: {{ product.selected_or_first_available_variant.id }},
       // puts each set of items into next position on cart, instead of one
-      properties: { "cart_index": {{ cart.item_count }} }
+      properties: { "cart_index": {{ cart.items.size }} }
       }
     ]
   })
